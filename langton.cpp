@@ -9,7 +9,7 @@ see this page to learn more about SFML and how to install it on your system:
 https://www.sfml-dev.org/tutorials/2.4/start-linux.php
 
 compile and launch on linux with this command line:
-g++ -c langton.cpp && g++ langton.o -o langton.app -lsfml-graphics -lsfml-app -lsfml-system && ./langton.app
+g++ -c langton.cpp && g++ langton.o -o langton.app -lsfml-graphics -lsfml-window -lsfml-system && ./langton.app
 */
 
 #define MAX_COLOR_QTY 30
