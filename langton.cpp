@@ -19,7 +19,7 @@ g++ -c langton.cpp && g++ langton.o -o langton.app -lsfml-graphics -lsfml-window
 #include <stdlib.h> 
 #include <time.h>
 
-
+//actual position of the ant
 struct Position
 {
   int x;
@@ -80,6 +80,7 @@ int main()
 			if(i==0)
 			{
 				std::cout << "you can choose 'S' at any time to randomize the remaining directions" << std::endl;
+        std::cout << "you can also enter a string to configure all directions" << std::endl;
 			}
 			std::cin>>currentLetter;
 
