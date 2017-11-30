@@ -1,14 +1,15 @@
 /*
+writer: MatioMe
+date: 21/05/2017
 
-This code is a fast wrote code to experiment the draws you can optain with more color and
-different configurations.
-
-compile and launch on linux with this command line:
-g++ -c langton.cpp && g++ langton.o -o langton.app -lsfml-graphics -lsfml-app -lsfml-system && ./langton.app
+This code is a fast written code to experiment the drawings you can obtain
+with more colors and other configurations than with the basic two color algorithm of the Langton ant.
 
 see this page to learn more about SFML and how to install it on your system:
 https://www.sfml-dev.org/tutorials/2.4/start-linux.php
 
+compile and launch on linux with this command line:
+g++ -c langton.cpp && g++ langton.o -o langton.app -lsfml-graphics -lsfml-app -lsfml-system && ./langton.app
 */
 
 #define MAX_COLOR_QTY 30
@@ -42,9 +43,24 @@ int main()
 	int colorOrientation[MAX_COLOR_QTY]={0};
 
 	//user interface:
-  	do
+  std::cout<<"\n            ##############################"<< std::endl;
+  std::cout<<"            ## Multicolor Langton's Ant ##"<< std::endl;
+  std::cout<<"            ##############################\n"<< std::endl;
+  std::cout<<"                  '\\__\n                   (o )     ___\n                   <>(_)(_)(___)\n                     < < > >\n                     ' ' ` `"<<std::endl;
+  std::cout<<"\n            ##############################"<< std::endl;
+  std::cout<<"            ## Author: matioMe          ##"<< std::endl;
+  std::cout<<"            ## Date: 21/05/2017         ##"<< std::endl;
+  std::cout<<"            ## Version: 1.0             ##"<< std::endl;
+  std::cout<<"            ##############################\n\n"<< std::endl;
+  
+  std::cout<<"         #####################################"<< std::endl;
+  std::cout<<"         # website: https://www.mathware.eu/ #"<< std::endl;
+  std::cout<<"         #####################################\n\n"<< std::endl;
+  
+
+  do
 	{
-		std::cout<<"please, choose a number of color between 2 and 30: "<< std::endl;
+		std::cout<<"Please, choose a number of color between 2 and 30: "<< std::endl;
 		std::cin>>numberOfColor;
 
 	}
@@ -57,14 +73,13 @@ int main()
 	for(int i=0; i<numberOfColor+1; i++)
 	{
 		char currentLetter;
-		
 
 		if(randomize!=1)
 		{
-			std::cout << "choose color " << i+1 << " direction ('L' for left, 'R' for right)" << std::endl;
+			std::cout << "\n\nChoose color " << i+1 << " direction ('L' for left, 'R' for right)" << std::endl;
 			if(i==0)
 			{
-				std::cout << "you can choose 'S' at any time to randomize the last directions" << std::endl;
+				std::cout << "you can choose 'S' at any time to randomize the remaining directions" << std::endl;
 			}
 			std::cin>>currentLetter;
 
@@ -94,19 +109,33 @@ int main()
 	}
 
 	char chooseDim='n';
-	std::cout<<"do you want to choose screen size? (Y/n)"<< std::endl;
+	std::cout<<"\n\ndo you want to choose screen size? (Y/n)"<< std::endl;
 	std::cin>>chooseDim;
 	
 	if(chooseDim=='Y' || chooseDim=='y')
 	{
 		do
 		{
-			std::cout<<"X and Y square dimension? (10 min, 1024 max)"<< std::endl;
+			std::cout<<"\nX and Y square dimension? (10 min, 1024 max)"<< std::endl;
 			std::cin>>DIM_Y;
 			DIM_X=DIM_Y;
 		}
-		while(DIM_Y<100 && DIM_Y>1024);
+		while(DIM_Y<100 || DIM_Y>1024);
 	}
+
+  int displaySpeed=100;
+  std::cout<<"\n\ndo you want to choose display speed? (Y/n)"<< std::endl;
+  std::cin>>chooseDim;
+  
+  if(chooseDim=='Y' || chooseDim=='y')
+  {
+    do
+    {
+      std::cout<<"\nChoose display speed (from 1 to 100)"<< std::endl;
+      std::cin>>displaySpeed;
+    }
+    while(displaySpeed<1 || displaySpeed>100);
+  }
 
 
 
@@ -170,7 +199,7 @@ int main()
       else turnRight(posAnt);
 
       //display
-      if(qtyMoves%5000 == 0)
+      if(qtyMoves%(50*displaySpeed) == 0)
       {
         //wipe screen
         window.clear(sf::Color::Black);
@@ -191,7 +220,11 @@ int main()
         window.display();
       }
     }
-    qtyMoves++;
+
+    if(posAnt.x!=DIM_X && posAnt.y!=DIM_Y)
+    {
+      qtyMoves++;
+    }
   }
   std::cout << "number of iterations: " << qtyMoves << std::endl;
   std::cout << "Sequence played: " << std::endl;
@@ -202,7 +235,6 @@ int main()
     if(colorOrientation[i]==1) std::cout<<'R';
   }
   std::cout<<std::endl;
-
 
   return 0;
 }
