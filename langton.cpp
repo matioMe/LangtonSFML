@@ -80,7 +80,7 @@ int main()
 			if(i==0)
 			{
 				std::cout << "you can choose 'S' at any time to randomize the remaining directions" << std::endl;
-        std::cout << "you can also enter a string to configure all directions" << std::endl;
+        std::cout << "you can also enter a string (or copy and paste) to configure all directions at once" << std::endl;
 			}
 			std::cin>>currentLetter;
 
